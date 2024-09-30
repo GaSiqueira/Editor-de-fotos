@@ -1,6 +1,8 @@
 import {Modal, View, Text, Pressable, StyleSheet} from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+// Emoji Picker é o componente que renderiza os stickers, ele aparece quando o usuario toca ou clica no botão "+".
+
 export default function EmojiPicker({isVisible, children, onClose}){
     return(
         <Modal animationType="slide" transparent={true} visible={isVisible}>

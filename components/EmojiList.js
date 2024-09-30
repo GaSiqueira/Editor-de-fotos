@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { StyleSheet, FlatList, Image, Platform, Pressable } from 'react-native';
 
+
+// Este componente controla a lista de emojis.
+
 export default function EmojiList ({ onSelect, onCloseModal}){
     const [emoji] = useState([
         require('../assets/images/emoji1.png'),
