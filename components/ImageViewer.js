@@ -10,7 +10,7 @@ export default function ImageViewer({ placeholderImageSource, selectedImage, bri
       <View style={[
         styles.overlay, 
         {
-          backgroundColor: `rgba(0, 0, 0, ${1 - brightness})`,
+          backgroundColor: `rgba(${brightness*10},${brightness*10},${brightness*10}, ${1 - brightness})`,
           opacity: saturation,
         }
         ]}/>

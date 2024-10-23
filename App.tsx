@@ -55,8 +55,8 @@ export default function App() {
   const onReset = () =>{
     setShowAppOptions(false);
     setSelectedImage('');
-    setBrightness(1);
-    setSaturation(1);
+/*     setBrightness(0);
+    setSaturation(0); */
   }
 
   const onSaveImageAsync = async() =>{
@@ -107,22 +107,22 @@ export default function App() {
           </View>
 
           <View style={styles.sliderContainer}>
-            <text style={styles.sliderLabel}>Brilho</text>
+            <text style={styles.sliderLabel}>Brilho: {brightness}</text>
             <Slider
             style={styles.slider}            
             value={brightness}
             onValueChange={setBrightness}
             minimumValue={0}
-            maximumValue={2}
+            maximumValue={1}
             step={0.01}/>
 
-            <text style={styles.sliderLabel}>Saturação</text>
+            <text style={styles.sliderLabel}>Saturação: {saturation}</text>
             <Slider
             style={styles.slider} 
             value={saturation}
             onValueChange={setSaturation}
             minimumValue={0}
-            maximumValue={2}
+            maximumValue={5}
             step={0.01}
             />
           </View>
