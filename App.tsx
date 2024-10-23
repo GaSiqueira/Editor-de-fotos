@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
+import Slider from '@react-native-community/slider'
 import {
   Button, 
   ImageViewer, 
@@ -16,12 +17,16 @@ import {
 
 const PlaceholderImage = require('./assets/images/background-image.png');
 
+
 export default function App() {
   const [pickedEmoji, setPickedEmoji] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   
+  const [brightness, setBrightness] = useState(1)
+  const [saturation, setSaturation] = useState(1)
+
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const imageRef = useRef<View | null>  (null);
 
@@ -49,6 +54,9 @@ export default function App() {
 
   const onReset = () =>{
     setShowAppOptions(false);
+    setSelectedImage('');
+    setBrightness(1);
+    setSaturation(1);
   }
 
   const onSaveImageAsync = async() =>{
@@ -77,17 +85,46 @@ export default function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <View style={styles.imageContainer}>
+
         <View ref={imageRef} collapsable={false}>
-          <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+          <ImageViewer
+          placeholderImageSource={PlaceholderImage}
+          selectedImage={selectedImage}
+          brightness={brightness}
+          saturation={saturation}
+           />
           {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji}/> : null}
         </View>
+
       </View>
       {showAppOptions?(
         <View style={styles.optionsContainer}>
+
           <View style={styles.optionsRow}>
             <IconButton icon="refresh" label="Reset" onPress={onReset} />
             <CircleButton onPress={onAddSticker} />
             <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
+          </View>
+
+          <View style={styles.sliderContainer}>
+            <text style={styles.sliderLabel}>Brilho</text>
+            <Slider
+            style={styles.slider}            
+            value={brightness}
+            onValueChange={setBrightness}
+            minimumValue={0}
+            maximumValue={2}
+            step={0.01}/>
+
+            <text style={styles.sliderLabel}>Saturação</text>
+            <Slider
+            style={styles.slider} 
+            value={saturation}
+            onValueChange={setSaturation}
+            minimumValue={0}
+            maximumValue={2}
+            step={0.01}
+            />
           </View>
         </View>
       ):(
@@ -125,5 +162,17 @@ const styles = StyleSheet.create({
   optionsRow: {
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  sliderContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  slider: {
+    width: 300,
+    height: 40,
+  },
+  sliderLabel: {
+    color: '#fff',
+    marginBottom: 10,
   },
 });
