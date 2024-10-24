@@ -1,9 +1,9 @@
-import Button from "./Button";
-import CircleButton from "./CircleButton";
-import ImageViewer from "./ImageViewer";
-import IconButton from "./IconButton";
-import EmojiPicker from "./EmojiPicker";
-import EmojiList from "./EmojiList";
-import EmojiSticker from "./EmojiSticker";
-import Saturate from "./Saturate";
+import Button from "./ButtonComponents/Button";
+import CircleButton from "./ButtonComponents/CircleButton";
+import ImageViewer from "./ImageComponents/ImageViewer";
+import IconButton from "./ButtonComponents/IconButton";
+import EmojiPicker from "./EmojiComponents/EmojiPicker";
+import EmojiList from "./EmojiComponents/EmojiList";
+import EmojiSticker from "./EmojiComponents/EmojiSticker";
+import Saturate from "./ImageComponents/Saturate";
 export {Button, CircleButton, ImageViewer, IconButton, EmojiPicker, EmojiList, EmojiSticker, Saturate}
