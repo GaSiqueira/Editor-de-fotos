@@ -98,6 +98,7 @@ export default function App() {
             estilo = {{
               width: '480',
               height: '300',
+              borderRadius: 18,
             }
             }
             contrast={contrast}

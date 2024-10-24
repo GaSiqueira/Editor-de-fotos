@@ -1,5 +1,7 @@
 import { Shaders, Node, GLSL} from 'gl-react';
 import { Surface } from "gl-react-dom";
+import { StyleSheet, Image} from 'react-native';
+
 const shaders = Shaders.create({
   Saturate: {
     frag: GLSL`
@@ -28,10 +30,21 @@ interface SaturateProps{
   children: React.ReactNode
 }
 
+
+
 const Saturate = ({ estilo, contrast, saturation, brightness, children }: SaturateProps) => (
-  <Surface width={estilo.width} height={estilo.height}>
+  <Surface width={styles.image.width} height={styles.image.height} style={styles.image.borderRadius}>
     <Node shader={shaders.Saturate} uniforms={{ contrast, saturation, brightness, t: children }} />
   </Surface>
 );
+
+const styles = StyleSheet.create({
+  image: {
+    width: 320,
+    height: 440,
+    borderRadius: 18
+  }
+}
+)
 
 export default Saturate;
