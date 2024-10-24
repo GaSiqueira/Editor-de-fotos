@@ -1,6 +1,6 @@
 import { useState, useRef} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {StyleSheet, View, Text } from 'react-native';
+import {StyleSheet, View, Text, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
@@ -25,7 +25,7 @@ export default function App() {
   const [pickedEmoji, setPickedEmoji] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAppOptions, setShowAppOptions] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImage, setSelectedImage] = useState('https://i.imgur.com/uTP9Xfr.jpg');
   
   const [brightness, setBrightness] = useState(1);
   const [saturation, setSaturation] = useState(1);
@@ -60,7 +60,7 @@ export default function App() {
 
   const onReset = () =>{
     setShowAppOptions(false);
-    setSelectedImage('');
+    setSelectedImage('https://i.imgur.com/uTP9Xfr.jpg');
     setBrightness(1);
     setSaturation(1);
     setContrast(1);
@@ -95,11 +95,16 @@ export default function App() {
 
         <View collapsable={false}>
             <Saturate
+            estilo = {{
+              width: '480',
+              height: '300',
+            }
+            }
             contrast={contrast}
             saturation={saturation}
             brightness={brightness}
             >
-              https://i.imgur.com/uTP9Xfr.jpg
+              {selectedImage}
             </Saturate>
           {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji}/> : null}
         </View>
@@ -191,5 +196,10 @@ const styles = StyleSheet.create({
   sliderLabel: {
     color: '#fff',
     marginBottom: 10,
+  },
+  image: {
+    width: 320,
+    height: 440,
+    borderRadius: 18
   },
 });

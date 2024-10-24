@@ -21,14 +21,15 @@ const shaders = Shaders.create({
 });
 
 interface SaturateProps{
+  estilo: any
   contrast: number,
   saturation: number,
   brightness: number,
   children: React.ReactNode
 }
 
-const Saturate = ({ contrast, saturation, brightness, children }: SaturateProps) => (
-  <Surface width={480} height={300}>
+const Saturate = ({ estilo, contrast, saturation, brightness, children }: SaturateProps) => (
+  <Surface width={estilo.width} height={estilo.height}>
     <Node shader={shaders.Saturate} uniforms={{ contrast, saturation, brightness, t: children }} />
   </Surface>
 );
