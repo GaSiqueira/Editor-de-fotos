@@ -1,5 +1,5 @@
 import { Shaders, Node, GLSL} from 'gl-react';
-import { Surface } from "gl-react-dom";
+import { Surface } from 'gl-react-dom';
 import { StyleSheet, Image} from 'react-native';
 
 const shaders = Shaders.create({
@@ -46,3 +46,27 @@ const styles = StyleSheet.create({
 )
 
 export default Saturate;
+
+/* Versão que "FUNCIONARIA" no mobile */
+
+/* interface SaturateProps {
+  contrast: number,
+  saturation: number,
+  brightness: number,
+  children: any
+}
+
+const Saturate = ({ contrast, saturation, brightness, children }: SaturateProps) => (
+  <Surface style={{ width: 320, height: 320 }}>
+    <Node shader={shaders.Saturate} uniforms={{ contrast, saturation, brightness, t: children }} />
+  </Surface>
+);
+
+const styles = StyleSheet.create({
+  image: {
+    width: 320,
+    height: 320,
+  }
+});
+
+export default Saturate; */
