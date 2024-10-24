@@ -6,7 +6,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
 import Slider from '@react-native-community/slider';
-import { Surface } from 'gl-react-expo';
 import {
   Button, 
   ImageViewer, 
@@ -107,7 +106,6 @@ export default function App() {
       </View>
       {showAppOptions?(
         <View style={styles.optionsContainer}>
-
           <View style={styles.optionsRow}>
             <IconButton icon="refresh" label="Reset" onPress={onReset} />
             <CircleButton onPress={onAddSticker} />
@@ -166,23 +164,26 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex:1, 
-    paddingTop: 58
+    paddingTop: 58,
+    alignItems: 'center',
   },
   footerContainer: {
     flex: 1 / 3,
     alignItems: 'center',
   },
   optionsContainer: {
+    marginTop: 80,
     position: 'absolute',
     bottom: 80,
   },
   optionsRow: {
     alignItems: 'center',
     flexDirection: 'row',
+    left: 50,
   },
   sliderContainer: {
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: 50,
   },
   slider: {
     width: 300,

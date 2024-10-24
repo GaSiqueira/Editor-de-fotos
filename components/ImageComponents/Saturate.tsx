@@ -40,7 +40,7 @@ const Saturate = ({contrast, saturation, brightness, children }: SaturateProps) 
 const styles = StyleSheet.create({
   image: {
     width: 320,
-    height: 440,
+    height: 320,
   }
 }
 )
