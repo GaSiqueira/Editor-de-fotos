@@ -1,10 +1,13 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
+interface ButtonProps{
+  label: any,
+  theme: any,
+  onPress: any
+} 
 
-// Componente que renderiza os botões na tela principal.
-
-export default function Button({ label, theme, onPress }) {
+export default function Button({ label, theme, onPress }:ButtonProps) {
   if (theme === "primary") {
     return (
       <View

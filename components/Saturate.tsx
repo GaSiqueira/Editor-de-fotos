@@ -1,4 +1,5 @@
-import { Shaders, Node, GLSL } from 'gl-react';
+import { Shaders, Node, GLSL} from 'gl-react';
+import { Surface } from "gl-react-dom";
 const shaders = Shaders.create({
   Saturate: {
     frag: GLSL`
@@ -19,8 +20,17 @@ const shaders = Shaders.create({
   },
 });
 
-const Saturate = ({ contrast, saturation, brightness, children }) => (
-  <Node shader={shaders.Saturate} uniforms={{ contrast, saturation, brightness, t: children }} />
+interface SaturateProps{
+  contrast: number,
+  saturation: number,
+  brightness: number,
+  children: React.ReactNode
+}
+
+const Saturate = ({ contrast, saturation, brightness, children }: SaturateProps) => (
+  <Surface width={480} height={300}>
+    <Node shader={shaders.Saturate} uniforms={{ contrast, saturation, brightness, t: children }} />
+  </Surface>
 );
 
 export default Saturate;

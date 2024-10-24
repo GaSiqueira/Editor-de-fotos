@@ -91,18 +91,16 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <View style={styles.imageContainer}>
+      <View ref={imageRef} style={styles.imageContainer}>
 
-        <View ref={imageRef} collapsable={false}>
-          <Surface style={{ width: 320, height: 440 }}>
+        <View collapsable={false}>
             <Saturate
             contrast={contrast}
             saturation={saturation}
             brightness={brightness}
             >
-              <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
+              https://i.imgur.com/uTP9Xfr.jpg
             </Saturate>
-          </Surface>
           {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji}/> : null}
         </View>
 
