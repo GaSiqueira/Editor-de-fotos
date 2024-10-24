@@ -23,7 +23,6 @@ const shaders = Shaders.create({
 });
 
 interface SaturateProps{
-  estilo: any
   contrast: number,
   saturation: number,
   brightness: number,
@@ -32,8 +31,8 @@ interface SaturateProps{
 
 
 
-const Saturate = ({ estilo, contrast, saturation, brightness, children }: SaturateProps) => (
-  <Surface width={styles.image.width} height={styles.image.height} style={styles.image.borderRadius}>
+const Saturate = ({contrast, saturation, brightness, children }: SaturateProps) => (
+  <Surface width={styles.image.width} height={styles.image.height}>
     <Node shader={shaders.Saturate} uniforms={{ contrast, saturation, brightness, t: children }} />
   </Surface>
 );
@@ -42,7 +41,6 @@ const styles = StyleSheet.create({
   image: {
     width: 320,
     height: 440,
-    borderRadius: 18
   }
 }
 )

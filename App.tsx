@@ -95,12 +95,6 @@ export default function App() {
 
         <View collapsable={false}>
             <Saturate
-            estilo = {{
-              width: '480',
-              height: '300',
-              borderRadius: 18,
-            }
-            }
             contrast={contrast}
             saturation={saturation}
             brightness={brightness}
@@ -121,7 +115,7 @@ export default function App() {
           </View>
 
           <View style={styles.sliderContainer}>
-            <Text style={styles.sliderLabel}>Brilho: </Text>
+            <Text style={styles.sliderLabel}>Brilho: {brightness.toFixed(1)}  </Text>
             <Slider
             style={styles.slider}
             minimumValue={0}
@@ -130,7 +124,7 @@ export default function App() {
             onValueChange={setBrightness}
             />
 
-            <Text style={styles.sliderLabel}>Saturação: </Text>
+            <Text style={styles.sliderLabel}>Saturação: {saturation.toFixed(1)} </Text>
             <Slider
             style={styles.slider}
             minimumValue={0}
@@ -139,7 +133,7 @@ export default function App() {
             onValueChange={setSaturation}
             />
 
-            <Text style={styles.sliderLabel}>Contraste: </Text>
+            <Text style={styles.sliderLabel}>Contraste: {contrast.toFixed(1)}  </Text>
             <Slider
             style={styles.slider}
             minimumValue={0}
