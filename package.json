@@ -13,9 +13,12 @@
     "@expo/vector-icons": "^14.0.3",
     "@react-native-community/slider": "^4.5.4",
     "expo": "~51.0.28",
+    "expo-gl": "^14.0.2",
     "expo-image-picker": "~15.0.7",
     "expo-media-library": "~16.0.5",
     "expo-status-bar": "~1.12.1",
+    "gl-react": "^5.2.0",
+    "gl-react-expo": "^5.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
@@ -26,6 +29,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@types/gl-react-expo": "^3.16.7",
     "@types/react": "~18.2.45",
     "typescript": "^5.1.3"
   },

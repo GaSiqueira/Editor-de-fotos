@@ -1,11 +1,12 @@
 import { useState, useRef} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {StyleSheet, View } from 'react-native';
+import {StyleSheet, View, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
-import Slider from '@react-native-community/slider'
+import Slider from '@react-native-community/slider';
+import { Surface } from 'gl-react-expo';
 import {
   Button, 
   ImageViewer, 
@@ -13,7 +14,9 @@ import {
   IconButton, 
   EmojiPicker, 
   EmojiList, 
-  EmojiSticker} from './components';
+  EmojiSticker,
+  Saturate
+} from './components';
 
 const PlaceholderImage = require('./assets/images/background-image.png');
 
@@ -24,15 +27,18 @@ export default function App() {
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   
-  const [brightness, setBrightness] = useState(1)
-  const [saturation, setSaturation] = useState(1)
+  const [brightness, setBrightness] = useState(1);
+  const [saturation, setSaturation] = useState(1);
+  const [contrast, setContrast] = useState(1);
 
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const imageRef = useRef<View | null>  (null);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
+      aspect: [4, 3],
       quality: 1,
     });
 
@@ -55,8 +61,9 @@ export default function App() {
   const onReset = () =>{
     setShowAppOptions(false);
     setSelectedImage('');
-/*     setBrightness(0);
-    setSaturation(0); */
+    setBrightness(1);
+    setSaturation(1);
+    setContrast(1);
   }
 
   const onSaveImageAsync = async() =>{
@@ -87,12 +94,15 @@ export default function App() {
       <View style={styles.imageContainer}>
 
         <View ref={imageRef} collapsable={false}>
-          <ImageViewer
-          placeholderImageSource={PlaceholderImage}
-          selectedImage={selectedImage}
-          brightness={brightness}
-          saturation={saturation}
-           />
+          <Surface style={{ width: 320, height: 440 }}>
+            <Saturate
+            contrast={contrast}
+            saturation={saturation}
+            brightness={brightness}
+            >
+              <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
+            </Saturate>
+          </Surface>
           {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji}/> : null}
         </View>
 
@@ -107,24 +117,33 @@ export default function App() {
           </View>
 
           <View style={styles.sliderContainer}>
-            <text style={styles.sliderLabel}>Brilho: {brightness}</text>
+            <Text style={styles.sliderLabel}>Brilho: </Text>
             <Slider
-            style={styles.slider}            
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={2}
             value={brightness}
             onValueChange={setBrightness}
-            minimumValue={0}
-            maximumValue={1}
-            step={0.01}/>
+            />
 
-            <text style={styles.sliderLabel}>Saturação: {saturation}</text>
+            <Text style={styles.sliderLabel}>Saturação: </Text>
             <Slider
-            style={styles.slider} 
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={2}
             value={saturation}
             onValueChange={setSaturation}
-            minimumValue={0}
-            maximumValue={5}
-            step={0.01}
             />
+
+            <Text style={styles.sliderLabel}>Contraste: </Text>
+            <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={2}
+            value={contrast}
+            onValueChange={setContrast}
+            />
+
           </View>
         </View>
       ):(
