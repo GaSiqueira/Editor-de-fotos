@@ -11,10 +11,10 @@ export default function ImageViewer({ imgSource, selectedImage}: ImageViewerProp
   return <Image source={imageSource} style={styles.image}></Image>
 }
 
-const styles = StyleSheet.create({
-  image: {
-    width: 320,
-    height: 440,
-    borderRadius: 18
-  }
-});
+// const styles = StyleSheet.create({
+//   image: {
+//     width: '80%',
+//     height: '70%',
+//     borderRadius: 18
+//   }
+// });

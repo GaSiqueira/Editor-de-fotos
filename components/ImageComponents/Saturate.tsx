@@ -1,6 +1,7 @@
 import { Shaders, Node, GLSL} from 'gl-react';
 import { Surface } from 'gl-react-dom';
 import { StyleSheet, Image} from 'react-native';
+import { red } from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 
 const shaders = Shaders.create({
   Saturate: {
@@ -39,8 +40,8 @@ const Saturate = ({contrast, saturation, brightness, children }: SaturateProps) 
 
 const styles = StyleSheet.create({
   image: {
-    width: 320,
-    height: 320,
+    width: '100%',
+    height: '300%',
   }
 }
 )

@@ -157,33 +157,32 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
+   container: {
+     flex: 1,
+     backgroundColor: '#25292e',
+     alignItems: 'center',
+   },
+   imageContainer: {
     alignItems: 'center',
-  },
-  imageContainer: {
-    flex:1, 
-    paddingTop: 58,
-    alignItems: 'center',
-  },
+    padding: 50,
+   },
   footerContainer: {
-    flex: 1 / 3,
     alignItems: 'center',
+    marginTop: '70%',
+    padding: 50,
+    gap: 20,
   },
   optionsContainer: {
-    marginTop: 80,
-    position: 'absolute',
-    bottom: 80,
-  },
-  optionsRow: {
+    marginTop: '70%',
     alignItems: 'center',
-    flexDirection: 'row',
-    left: 50,
   },
+   optionsRow: {
+     alignItems: 'center',
+     flexDirection: 'row',
+   },
   sliderContainer: {
-    paddingHorizontal: 20,
-    marginTop: 50,
+    marginTop: '15%',
+    alignItems: 'center',
   },
   slider: {
     width: 300,
@@ -191,11 +190,10 @@ const styles = StyleSheet.create({
   },
   sliderLabel: {
     color: '#fff',
-    marginBottom: 10,
   },
-  image: {
-    width: 320,
-    height: 440,
-    borderRadius: 18
-  },
+  //  image: {
+  //    width: 320,
+  //    height: 440,
+  //    borderRadius: 18
+  //  },
 });
