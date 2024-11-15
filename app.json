@@ -3,6 +3,8 @@
     "name": "editor-de-fotos",
     "slug": "editor-de-fotos",
     "version": "1.0.0",
+    "newArchEnabled": true,
+    
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

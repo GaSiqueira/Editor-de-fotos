@@ -54,7 +54,7 @@ export default function App() {
   const onReset = () =>{
     setShowAppOptions(false);
     setSelectedImage('');
-    setBrightness(0);
+    setBrightness(1);
   }
 
   const onSaveImageAsync = async() =>{
