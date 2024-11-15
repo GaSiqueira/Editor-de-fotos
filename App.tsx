@@ -1,11 +1,11 @@
 import { useState, useRef} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {StyleSheet, View, Text, Image } from 'react-native';
+import {StyleSheet, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
-import Slider from '@react-native-community/slider';
+import Slider from '@react-native-community/slider'
 import {
   Button, 
   ImageViewer, 
@@ -13,9 +13,7 @@ import {
   IconButton, 
   EmojiPicker, 
   EmojiList, 
-  EmojiSticker,
-  Saturate
-} from './components';
+  EmojiSticker} from './components';
 
 const PlaceholderImage = require('./assets/images/background-image.png');
 
@@ -24,20 +22,16 @@ export default function App() {
   const [pickedEmoji, setPickedEmoji] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAppOptions, setShowAppOptions] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('https://i.imgur.com/uTP9Xfr.jpg');
+  const [selectedImage, setSelectedImage] = useState('');
   
-  const [brightness, setBrightness] = useState(1);
-  const [saturation, setSaturation] = useState(1);
-  const [contrast, setContrast] = useState(1);
+  const [brightness, setBrightness] = useState(1)
 
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const imageRef = useRef<View | null>  (null);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
 
@@ -59,10 +53,8 @@ export default function App() {
 
   const onReset = () =>{
     setShowAppOptions(false);
-    setSelectedImage('https://i.imgur.com/uTP9Xfr.jpg');
-    setBrightness(1);
-    setSaturation(1);
-    setContrast(1);
+    setSelectedImage('');
+    setBrightness(0);
   }
 
   const onSaveImageAsync = async() =>{
@@ -90,22 +82,21 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <View ref={imageRef} style={styles.imageContainer}>
+      <View style={styles.imageContainer}>
 
-        <View collapsable={false}>
-            <Saturate
-            contrast={contrast}
-            saturation={saturation}
-            brightness={brightness}
-            >
-              {selectedImage}
-            </Saturate>
+        <View ref={imageRef} collapsable={false}>
+          <ImageViewer
+          placeholderImageSource={PlaceholderImage}
+          selectedImage={selectedImage}
+          brightness={brightness}
+           />
           {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji}/> : null}
         </View>
 
       </View>
       {showAppOptions?(
         <View style={styles.optionsContainer}>
+
           <View style={styles.optionsRow}>
             <IconButton icon="refresh" label="Reset" onPress={onReset} />
             <CircleButton onPress={onAddSticker} />
@@ -113,33 +104,14 @@ export default function App() {
           </View>
 
           <View style={styles.sliderContainer}>
-            <Text style={styles.sliderLabel}>Brilho: {brightness.toFixed(1)}  </Text>
+            <Text style={styles.sliderLabel}>Brilho: {brightness.toFixed(1)}</Text>
             <Slider
-            style={styles.slider}
-            minimumValue={0}
-            maximumValue={2}
+            style={styles.slider}            
             value={brightness}
             onValueChange={setBrightness}
-            />
-
-            <Text style={styles.sliderLabel}>Saturação: {saturation.toFixed(1)} </Text>
-            <Slider
-            style={styles.slider}
             minimumValue={0}
-            maximumValue={2}
-            value={saturation}
-            onValueChange={setSaturation}
-            />
-
-            <Text style={styles.sliderLabel}>Contraste: {contrast.toFixed(1)}  </Text>
-            <Slider
-            style={styles.slider}
-            minimumValue={0}
-            maximumValue={2}
-            value={contrast}
-            onValueChange={setContrast}
-            />
-
+            maximumValue={1}
+            step={0.01}/>
           </View>
         </View>
       ):(
@@ -157,32 +129,30 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-   container: {
-     flex: 1,
-     backgroundColor: '#25292e',
-     alignItems: 'center',
-   },
-   imageContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#25292e',
     alignItems: 'center',
-    padding: 50,
-   },
+  },
+  imageContainer: {
+    flex:1, 
+    paddingTop: 58
+  },
   footerContainer: {
+    flex: 1 / 3,
     alignItems: 'center',
-    marginTop: '70%',
-    padding: 50,
-    gap: 20,
   },
   optionsContainer: {
-    marginTop: '70%',
-    alignItems: 'center',
+    position: 'absolute',
+    bottom: 80,
   },
-   optionsRow: {
-     alignItems: 'center',
-     flexDirection: 'row',
-   },
-  sliderContainer: {
-    marginTop: '15%',
+  optionsRow: {
     alignItems: 'center',
+    flexDirection: 'row',
+  },
+  sliderContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20,
   },
   slider: {
     width: 300,
@@ -190,10 +160,6 @@ const styles = StyleSheet.create({
   },
   sliderLabel: {
     color: '#fff',
+    marginBottom: 10,
   },
-  //  image: {
-  //    width: 320,
-  //    height: 440,
-  //    borderRadius: 18
-  //  },
 });

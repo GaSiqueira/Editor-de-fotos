@@ -1,11 +1,9 @@
 import {View, Pressable, StyleSheet} from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-interface CircleButtonProps{
-    onPress: any,
-}
+// Circle Button é o componente para renderizar o botão "+" quando o usuario for editar a foto
 
-export default function CircleButton ({onPress}: CircleButtonProps){
+export default function CircleButton ({onPress}){
     return(
         <View style={styles.circleButtonContainer}>
             <Pressable style={styles.circleButton} onPress={onPress}>

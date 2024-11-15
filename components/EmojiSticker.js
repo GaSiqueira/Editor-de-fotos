@@ -2,12 +2,9 @@ import {View, Image} from 'react-native';
 import Animated, {useAnimatedStyle, useSharedValue, withSpring} from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
-interface EmojiStickerProps{
-    imageSize: number,
-    stickerSource: any,
-  }
+// Componente Emoji Sticker controla as funcionalidades dos stickers, sendo elas: Aumentar o tamanho do emoji e modificar a localização do emoji na foto.
 
-export default function EmojiSticker({ imageSize, stickerSource}: EmojiStickerProps){
+export default function EmojiSticker({ imageSize, stickerSource}){
 
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
