@@ -2,16 +2,19 @@ import { useState } from "react";
 import { StyleSheet, FlatList, Image, Platform, Pressable } from 'react-native';
 
 
-// Este componente controla a lista de emojis.
+interface EmojiListProps{
+    onSelect: any,
+    onCloseModal: any,
+}
 
-export default function EmojiList ({ onSelect, onCloseModal}){
+export default function EmojiList ({ onSelect, onCloseModal}: EmojiListProps){
     const [emoji] = useState([
-        require('../assets/images/emoji1.png'),
-        require('../assets/images/emoji2.png'),
-        require('../assets/images/emoji3.png'),
-        require('../assets/images/emoji4.png'),
-        require('../assets/images/emoji5.png'),
-        require('../assets/images/emoji6.png'),
+        require('../../assets/images/emoji1.png'),
+        require('../../assets/images/emoji2.png'),
+        require('../../assets/images/emoji3.png'),
+        require('../../assets/images/emoji4.png'),
+        require('../../assets/images/emoji5.png'),
+        require('../../assets/images/emoji6.png'),
     ])
     return(
         <FlatList 

@@ -1,10 +1,11 @@
 import { useState, useRef} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {StyleSheet, View } from 'react-native';
+import {StyleSheet, View, Text, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
+import Slider from '@react-native-community/slider';
 import {
   Button, 
   ImageViewer, 
@@ -12,22 +13,31 @@ import {
   IconButton, 
   EmojiPicker, 
   EmojiList, 
-  EmojiSticker} from './components';
+  EmojiSticker,
+  Saturate
+} from './components';
 
 const PlaceholderImage = require('./assets/images/background-image.png');
+
 
 export default function App() {
   const [pickedEmoji, setPickedEmoji] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAppOptions, setShowAppOptions] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImage, setSelectedImage] = useState('https://i.imgur.com/uTP9Xfr.jpg');
   
+  const [brightness, setBrightness] = useState(1);
+  const [saturation, setSaturation] = useState(1);
+  const [contrast, setContrast] = useState(1);
+
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const imageRef = useRef<View | null>  (null);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
+      aspect: [4, 3],
       quality: 1,
     });
 
@@ -49,6 +59,10 @@ export default function App() {
 
   const onReset = () =>{
     setShowAppOptions(false);
+    setSelectedImage('https://i.imgur.com/uTP9Xfr.jpg');
+    setBrightness(1);
+    setSaturation(1);
+    setContrast(1);
   }
 
   const onSaveImageAsync = async() =>{
@@ -76,11 +90,19 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <View style={styles.imageContainer}>
-        <View ref={imageRef} collapsable={false}>
-          <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+      <View ref={imageRef} style={styles.imageContainer}>
+
+        <View collapsable={false}>
+            <Saturate
+            contrast={contrast}
+            saturation={saturation}
+            brightness={brightness}
+            >
+              {selectedImage}
+            </Saturate>
           {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji}/> : null}
         </View>
+
       </View>
       {showAppOptions?(
         <View style={styles.optionsContainer}>
@@ -88,6 +110,36 @@ export default function App() {
             <IconButton icon="refresh" label="Reset" onPress={onReset} />
             <CircleButton onPress={onAddSticker} />
             <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
+          </View>
+
+          <View style={styles.sliderContainer}>
+            <Text style={styles.sliderLabel}>Brilho: {brightness.toFixed(1)}  </Text>
+            <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={2}
+            value={brightness}
+            onValueChange={setBrightness}
+            />
+
+            <Text style={styles.sliderLabel}>Saturação: {saturation.toFixed(1)} </Text>
+            <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={2}
+            value={saturation}
+            onValueChange={setSaturation}
+            />
+
+            <Text style={styles.sliderLabel}>Contraste: {contrast.toFixed(1)}  </Text>
+            <Slider
+            style={styles.slider}
+            minimumValue={0}
+            maximumValue={2}
+            value={contrast}
+            onValueChange={setContrast}
+            />
+
           </View>
         </View>
       ):(
@@ -105,25 +157,43 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
+   container: {
+     flex: 1,
+     backgroundColor: '#25292e',
+     alignItems: 'center',
+   },
+   imageContainer: {
     alignItems: 'center',
-  },
-  imageContainer: {
-    flex:1, 
-    paddingTop: 58
-  },
+    padding: 50,
+   },
   footerContainer: {
-    flex: 1 / 3,
     alignItems: 'center',
+    marginTop: '70%',
+    padding: 50,
+    gap: 20,
   },
   optionsContainer: {
-    position: 'absolute',
-    bottom: 80,
-  },
-  optionsRow: {
+    marginTop: '70%',
     alignItems: 'center',
-    flexDirection: 'row',
   },
+   optionsRow: {
+     alignItems: 'center',
+     flexDirection: 'row',
+   },
+  sliderContainer: {
+    marginTop: '15%',
+    alignItems: 'center',
+  },
+  slider: {
+    width: 300,
+    height: 40,
+  },
+  sliderLabel: {
+    color: '#fff',
+  },
+  //  image: {
+  //    width: 320,
+  //    height: 440,
+  //    borderRadius: 18
+  //  },
 });
