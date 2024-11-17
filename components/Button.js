@@ -1,56 +1,50 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-
-// Componente que renderiza os botões na tela principal.
-
 export default function Button({ label, theme, onPress }) {
-  if (theme === "primary") {
-    return (
-      <View
-        style={[
-          styles.buttonContainer,
-          { borderWidth: 4, borderColor: '#ffd33d', borderRadius: 18 },
-        ]}>
-        <Pressable style={[styles.button, { backgroundColor: '#fff' }]} onPress={onPress}>
-          <FontAwesome name="picture-o" size={18} color="#25292e" style={styles.buttonIcon} />
-          <Text style={[styles.buttonLabel, { color: '#25292e' }]}>{label}</Text>
-        </Pressable>
-      </View>      
-    );
-  }
-
   return (
-    <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonLabel}>{label}</Text>
-      </Pressable>
-    </View>
+    <Pressable
+      style={[
+        styles.button,
+        theme === "primary" ? styles.primaryButton : styles.defaultButton,
+      ]}
+      onPress={onPress}
+    >
+      {theme === "primary" && (
+        <FontAwesome name="picture-o" size={18} color="#fff" style={styles.buttonIcon} />
+      )}
+      <Text style={styles.buttonLabel}>{label}</Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
-  },
   button: {
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
+    width: 320,
+    height: 60,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5, 
+    marginBottom: 20,
+  },
+  primaryButton: {
+    backgroundColor: '#1E90FF',
+  },
+  defaultButton: {
+    backgroundColor: '#25292e',
   },
   buttonLabel: {
     color: '#fff',
     fontSize: 16,
+    fontWeight: 'bold',
   },
   buttonIcon: {
-    paddingRight: 8,
+    marginRight: 8,
   },
 });

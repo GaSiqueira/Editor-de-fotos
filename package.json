@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo/metro-runtime": "~4.0.0",
     "@expo/vector-icons": "^14.0.3",
+<<<<<<< Updated upstream
     "@react-native-community/slider": "4.5.5",
     "expo": "^52.0.7",
     "expo-image-picker": "~16.0.2",
@@ -23,6 +24,21 @@
     "react-native-reanimated": "~3.16.1",
     "react-native-view-shot": "~4.0.0",
     "react-native-web": "~0.19.13"
+=======
+    "@react-native-community/slider": "^4.5.4",
+    "expo": "~51.0.28",
+    "expo-image-picker": "~15.0.7",
+    "expo-media-library": "~16.0.5",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-reanimated": "~3.10.1",
+    "react-native-share": "^11.0.4",
+    "react-native-view-shot": "3.8.0",
+    "react-native-web": "~0.19.10"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
